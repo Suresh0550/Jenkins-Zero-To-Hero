@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        SONAR_URL = "http://34.211.226.142:9000"  // Replace with your EC2 IP or DNS
+        SONAR_URL = "http://34.211.226.142:9000"
         DOCKER_IMAGE = "abhishekf5/ultimate-cicd:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
     }
@@ -18,7 +18,9 @@ pipeline {
         }
         stage('Build and Test') {
             steps {
-                sh 'mvn clean package'
+                dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {  // Navigate to correct directory
+                    sh 'mvn clean package'
+                }
             }
         }
         stage('Static Code Analysis') {
@@ -55,4 +57,3 @@ pipeline {
         }
     }
 }
-
