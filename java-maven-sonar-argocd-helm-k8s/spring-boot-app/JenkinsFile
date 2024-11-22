@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Build and Test') {
             steps {
-                dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {  // Navigate to correct directory
+                dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {  // Navigate to the directory containing pom.xml
                     sh 'mvn clean package'
                 }
             }
